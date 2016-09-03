@@ -6,7 +6,7 @@ int head = 0;
 int openmode = 0;
 int closemode = 0;
 
-int truBrace(int openmode, int closemode) {
+int trueBrace(int openmode, int closemode) {
   if (head == 0) {
     return printf("Stack Underflow!\n");
   } 
@@ -22,12 +22,14 @@ int truBrace(int openmode, int closemode) {
 
 int top() {
   if (head == 0) {
-    return printf("Stack Underflow!\n");
+    printf("Stack Underflow!\n");
+    return 0;
   }
   if (head >= 10) {
-    return printf("Stack Overflow!\n");
+    printf("Stack Overflow!\n");
+    return 0;
   }
-  return printf("%c\n", stack[head - 1]);
+  return stack[head - 1];
 }
 
 void push(char element) {
@@ -39,17 +41,14 @@ void push(char element) {
     if (closemode == 0) {
       if (stack[head - 1] == '(') {
         ++openmode;
-        printf("%i %i", openmode, closemode);
         return;
       } else if (stack[head - 1] == ')' && openmode >= 1) {
         --openmode;
-        printf("%i %i", openmode, closemode);
         return;
       }
     }
     if (stack[head - 1] == ')') {
       --closemode;
-      printf("%i %i", openmode, closemode);
     }
   }
 }
@@ -115,7 +114,7 @@ int main(int argc, char** argv) {
     
     switch (c) {
       case TOP:
-        top();
+        printf("%c\n", top());
         break;
       case PUSH:
         char value;
@@ -126,7 +125,6 @@ int main(int argc, char** argv) {
         pop();
         break;
       case PRINT:
-        printf("%i %i\n", openmode, closemode);
         print();
         break;
       case EXIT:

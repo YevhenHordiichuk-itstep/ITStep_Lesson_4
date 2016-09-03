@@ -15,12 +15,14 @@ void getMax() {
 
 int top() {
   if (head == 0) {
-    return printf("Stack Underflow!\n");
+    printf("Stack Underflow!\n");
+    return 0;
   }
   if (head >= 10) {
-    return printf("Stack Overflow!\n");
+    printf("Stack Overflow!\n");
+    return 0;
   }
-  return printf("%i", stack[head - 1]);
+  return stack[head - 1];
 }
 
 void push(int element, int max) {
@@ -89,7 +91,7 @@ int main(int argc, char** argv) {
 
     switch (c) {
       case TOP:
-        top();
+        printf("%i\n", top());
         break;
       case PUSH:
         int value;
