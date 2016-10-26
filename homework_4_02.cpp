@@ -5,7 +5,7 @@
 #include <cstdlib>
 
 int leftstack[10];
-const size_t SIZE = sizeof(leftstack) / sizeof(leftstack[0]);
+const size_t SIZE = 10;
 int rightstack[10];
 int head = 0;
 int tail = 0;
