@@ -1,4 +1,4 @@
-// homework_4_14_test 
+// homework_4_14_test_fixed
 
 #include <cstdio>
 #include <cstdlib>
@@ -6,48 +6,44 @@
 #include <algorithm>
 #include <windows.h>
 
-void insertionSort(int A[], size_t SIZE) {
+void insertionSort(int array[], size_t SIZE) {
   for (size_t i = 1; i < SIZE; ++i) {
-    int key = A[i];
+    int key = array[i];
     int k = i - 1;
-    while (k >= 0 && A[k] > key) {
-        int temp = A[k];
-        A[k] = key;
-        A[k + 1] = temp;
+    while (k >= 0 && array[k] > key) {
+        int temp = array[k];
+        array[k] = key;
+        array[k + 1] = temp;
         --k;
     }
   }
 }
 
-bool binarySearch(int A[], size_t SIZE, int x) {
+bool binarySearch(int array[], size_t SIZE, int x) {
   size_t first = 0;
   size_t last = SIZE;
   if (SIZE == 0) {
     return false;
-  } else if (x < A[first]) {
+  } else if (x < array[first]) {
     return false;
-  } else if (x > A[SIZE - 1]){
+  } else if (x > array[SIZE - 1]){
     return false;
-  } else if (x == A[first]) {
+  } else if (x == array[first]) {
     return true;
-  } else if (x == A[SIZE - 1]) {
+  } else if (x == array[SIZE - 1]) {
     return true;
   }
   
   while (first < last) {
   size_t mid = first + (last - first) / 2;
-    if (x <= A[mid]) {
+    if (x <= array[mid]) {
       last = mid;                    
     } else {
       first = mid + 1;            
     }
   } 
   
-  if (A[last] == x) {
-    return true;
-  } else {
-    return false;
-  }
+  return array[last] == x;
 }
 
 void generate(int array[], size_t SIZE) {
@@ -71,9 +67,10 @@ void printarray(int array[], size_t SIZE) {
 }
 
 int main(int argc, char** argv) {
-  while(true) {
-    //srand(time(NULL));
-    srand(GetTickCount());
+  double seconds = (double) NULL;
+  clock_t start = clock();
+  while(seconds < 5.0) {
+    srand(GetTickCount() + rand());
     size_t SIZE = rand() % 14 + 1;
     int array[SIZE];
     int copy[SIZE];
@@ -93,7 +90,8 @@ int main(int argc, char** argv) {
       printarray(array, SIZE);
       break;
     }
-    
+    clock_t elapsed = clock() - start;
+    seconds = (double) elapsed / CLOCKS_PER_SEC;
   }
   return 0;
 }
